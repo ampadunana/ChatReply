@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
@@ -27,7 +29,8 @@ export async function POST(req: Request) {
       created_at: new Date().toISOString()
     };
 
-    // Insert into Supabase waitlist table
+    const supabase = getSupabaseClient();
+
     const { data: result, error } = await supabase
       .from('waitlist')
       .insert([record])
