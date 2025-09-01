@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern gradient background with brand colors */
+:root {
+  --bg1: 255 255 255;
+  --bg2: 240 249 255;
+}
+html, body {
+  height: 100%;
+}
+body {
+  background: radial-gradient(1200px 600px at 10% 10%, rgb(var(--bg2)) 0%, white 50%),
+              radial-gradient(900px 500px at 80% 0%, rgba(14, 116, 144, 0.06) 0%, transparent 60%);
+}
+
+/* Nice focus ring for inputs/buttons */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-1;
+}
+
+/* Card base */
+.card {
+  @apply bg-white/80 backdrop-blur border border-black/5 shadow-sm rounded-2xl;
+}

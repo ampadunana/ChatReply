@@ -1,0 +1,29 @@
+{
+  "name": "chatreply",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.56.1",
+    "@vercel/blob": "^0.21.0",
+    "lucide-react": "^0.460.0",
+    "next": "14.2.32",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.12",
+    "autoprefixer": "^10.4.20",
+    "canvas": "^3.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.32",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4"
+  }
+}
