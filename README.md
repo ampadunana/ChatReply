@@ -92,6 +92,24 @@ This project is designed to work with Supabase for database and authentication. 
 3. Add the environment variables to your `.env.local` file
 4. Set up your database schema as needed
 
+### Vercel Deployment
+
+This project is optimized for Vercel deployment:
+
+1. **Connect to Vercel:**
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Import your GitHub repository
+   - Vercel will automatically detect Next.js
+
+2. **Environment Variables:**
+   - Add your Supabase environment variables in Vercel dashboard
+   - Go to Project Settings → Environment Variables
+   - Add: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
+
+3. **Deploy:**
+   - Vercel will automatically deploy on every push to master
+   - Your site will be available at `https://your-project.vercel.app`
+
 ## Features
 
 - ✅ WhatsApp AI assistant automation
