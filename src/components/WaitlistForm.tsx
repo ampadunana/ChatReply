@@ -41,8 +41,18 @@ export default function WaitlistForm() {
         body: JSON.stringify(form)
       });
       if (!res.ok) {
-        const t = await res.text();
-        throw new Error(t || "Failed to join waitlist");
+        // Read the body ONCE, then try to parse JSON from the captured string
+        const raw = await res.text().catch(() => "");
+        let message = "Failed to join waitlist";
+        if (raw) {
+          try {
+            const j = JSON.parse(raw);
+            message = j?.message || j?.error || raw || message;
+          } catch {
+            message = raw || message;
+          }
+        }
+        throw new Error(message);
       }
       router.push("/waitlist/success");
     } catch (err: any) {

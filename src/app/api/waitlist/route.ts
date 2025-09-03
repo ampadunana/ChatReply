@@ -25,23 +25,34 @@ export async function POST(req: Request) {
       whatsapp: whatsapp || "",
       use_case: useCase || "",
       ip,
-      user_agent: req.headers.get("user-agent") || "",
-      created_at: new Date().toISOString()
+      user_agent: req.headers.get("user-agent") || ""
     };
 
     const supabase = getSupabaseClient();
 
+    // Insert and ignore duplicates by email (no UPDATE path, works with RLS insert-only policy)
     const { data: result, error } = await supabase
       .from('waitlist')
-      .insert([record])
-      .select();
+      .insert([record], { onConflict: 'email', ignoreDuplicates: true });
 
     if (error) {
+      // Treat duplicate email (unique_violation) as success
+      // Postgres error code 23505 => unique_violation
+      // Supabase error object usually contains `code`
+      const code = (error as any)?.code || (error as any)?.details;
+      if (code === '23505' || String(error?.message || '').toLowerCase().includes('duplicate')) {
+        return NextResponse.json({ ok: true, duplicate: true });
+      }
       console.error('Supabase error:', error);
+      const message = (error as any)?.message || "Failed to save to database";
+      // If table is missing, surface a clear message in development
+      if (process.env.NODE_ENV !== 'production') {
+        return NextResponse.json({ ok: false, message }, { status: 500 });
+      }
       return new NextResponse("Failed to save to database", { status: 500 });
     }
 
-    return NextResponse.json({ ok: true, data: result });
+    return NextResponse.json({ ok: true, data: result ?? null });
   } catch (e: any) {
     console.error('API error:', e);
     return new NextResponse(e?.message || "Unexpected error", { status: 500 });
