@@ -27,7 +27,10 @@ export const metadata: Metadata = {
     icon: [
       { url: "/ChatReplyLogo.png", sizes: "16x16", type: "image/png" },
       { url: "/ChatReplyLogo.png", sizes: "32x32", type: "image/png" },
-      { url: "/ChatReplyLogo.png", sizes: "48x48", type: "image/png" }
+      { url: "/ChatReplyLogo.png", sizes: "48x48", type: "image/png" },
+      { url: "/ChatReplyLogo.png", sizes: "64x64", type: "image/png" },
+      { url: "/ChatReplyLogo.png", sizes: "128x128", type: "image/png" },
+      { url: "/ChatReplyLogo.png", sizes: "256x256", type: "image/png" }
     ],
     shortcut: ["/ChatReplyLogo.png"],
     apple: ["/ChatReplyLogo.png"]
