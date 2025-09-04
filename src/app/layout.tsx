@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
       { url: "/icon.png", type: "image/png", sizes: "32x32" }
     ],
     shortcut: ["/favicon.ico"],
@@ -36,6 +36,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+      </head>
       <body className="min-h-screen text-black/80 antialiased">
         <Header />
         <main className="pt-6">{children}</main>
