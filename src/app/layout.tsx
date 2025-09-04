@@ -23,13 +23,14 @@ export const metadata: Metadata = {
     description: "AI customer service that never sleeps. Lead capture and analytics included.",
     images: ["/ChatReplyLogo.png"]
   },
-  icons: { 
+  icons: {
     icon: [
-      { url: "/ChatReplyLogo.png", sizes: "32x32" },
       { url: "/ChatReplyLogo.png", sizes: "16x16", type: "image/png" },
       { url: "/ChatReplyLogo.png", sizes: "32x32", type: "image/png" },
       { url: "/ChatReplyLogo.png", sizes: "48x48", type: "image/png" }
-    ]
+    ],
+    shortcut: ["/ChatReplyLogo.png"],
+    apple: ["/ChatReplyLogo.png"]
   }
 };
 
