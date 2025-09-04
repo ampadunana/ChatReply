@@ -4,6 +4,14 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     optimizePackageImports: ['lucide-react']
+  },
+  async rewrites() {
+    return [
+      { source: '/favicon.ico', destination: '/ChatReplyLogo.png' },
+      { source: '/favicon-16x16.png', destination: '/ChatReplyLogo.png' },
+      { source: '/favicon-32x32.png', destination: '/ChatReplyLogo.png' },
+      { source: '/favicon-48x48.png', destination: '/ChatReplyLogo.png' }
+    ];
   }
 };
 
