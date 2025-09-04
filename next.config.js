@@ -15,6 +15,10 @@ const nextConfig = {
       {
         source: '/favicon.ico',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }]
+      },
+      {
+        source: '/favicon-6.ico',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }]
       }
     ];
   }
