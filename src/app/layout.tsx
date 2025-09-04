@@ -28,12 +28,9 @@ export const metadata: Metadata = {
    * IMPORTANT: Use `/icon.svg` (no `/app/`) because Next exposes `src/app/icon.svg` at `/icon.svg`.
    */
   icons: {
-    icon: [
-      { url: "/icon.svg?v=4", type: "image/svg+xml" },
-      { url: "/favicon.ico?v=4" }
-    ],
-    shortcut: ["/favicon.ico?v=4"],
-    apple: ["/apple-icon.png?v=4"]
+    icon: [{ url: "/ChatReplyLogo.png" }],
+    shortcut: ["/ChatReplyLogo.png"],
+    apple: ["/ChatReplyLogo.png"]
   }
 };
 

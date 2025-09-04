@@ -1,13 +1,13 @@
 export default function Contact() {
   const subject = encodeURIComponent("ChatReply Inquiry");
-  const body = encodeURIComponent("Hi ChatReply team,\n\nI’d like to learn more about ChatReply.");
+  const body = encodeURIComponent("Hi ChatReply team,\n\nAdd  your issue here.");
   const mailto = `mailto:hello@chatreply.online?subject=${subject}&body=${body}`;
 
   return (
     <section className="container my-12">
       <h1 className="text-3xl font-semibold tracking-tight">Contact</h1>
       <p className="mt-2 text-black/70">
-        Prefer email? <a href={mailto} className="underline">hello@chatreply.online</a>
+        Email us at <a href={mailto} className="underline">hello@chatreply.online</a>
       </p>
 
       <div className="mt-6 card p-6">
