@@ -19,6 +19,12 @@ export default function WaitlistForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    // Enforce digits-only for WhatsApp number
+    if (name === "whatsapp") {
+      const digitsOnly = String(value).replace(/\D/g, "");
+      setForm((f) => ({ ...f, whatsapp: digitsOnly }));
+      return;
+    }
     setForm((f) => ({ ...f, [name]: value }));
   };
 
@@ -94,7 +100,7 @@ export default function WaitlistForm() {
             name="business"
             value={form.business}
             onChange={handleChange}
-            placeholder="Your Salon / Store"
+            placeholder="Your Store Name"
             className="w-full rounded-xl border border-gray-200 px-4 py-3 focus-ring focus:border-brand-500 transition-colors"
           />
         </div>
@@ -109,12 +115,15 @@ export default function WaitlistForm() {
           />
         </div>
         <div className="sm:col-span-1">
-          <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp number (optional)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp number</label>
           <input
             name="whatsapp"
             value={form.whatsapp}
             onChange={handleChange}
-            placeholder="+233 24 123 4567"
+            placeholder="233241234567"
+            inputMode="numeric"
+            pattern="^[0-9]*$"
+            title="Digits only"
             className="w-full rounded-xl border border-gray-200 px-4 py-3 focus-ring focus:border-brand-500 transition-colors"
           />
         </div>

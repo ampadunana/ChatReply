@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase";
-import { sendEmail } from "@/lib/email";
+import { sendTransactional, sendSupport } from "@/lib/mailer";
 
 export const dynamic = "force-dynamic";
+export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
   try {
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
     // Insert and ignore duplicates by email (no UPDATE path, works with RLS insert-only policy)
     const { data: result, error } = await supabase
       .from('waitlist')
-      .insert([record], { onConflict: 'email', ignoreDuplicates: true });
+      .insert([record]);
 
     if (error) {
       // Treat duplicate email (unique_violation) as success
@@ -54,22 +55,32 @@ export async function POST(req: Request) {
     }
 
     // Fire-and-forget emails (do not block response)
-    const notifyTo = process.env.RESEND_TO_SUPPORT_EMAIL || process.env.CONTACT_TO_EMAIL || 'hello@chatreply.online'
-    const fromSupport = process.env.RESEND_FROM_SUPPORT_EMAIL || 'ChatReply Support <hello@chatreply.online>'
-    const fromOnboard = process.env.RESEND_FROM_ONBOARD_EMAIL || fromSupport
+    const notifyTo = process.env.ZOHO_HELLO_USER || 'hello@chatreply.online'
     try {
       await Promise.all([
-        sendEmail({
-          from: fromSupport,
+        sendSupport({
           to: notifyTo,
           subject: `New waitlist signup: ${record.name}`,
           html: `<p><strong>Name:</strong> ${record.name}</p><p><strong>Email:</strong> ${record.email}</p><p><strong>Business:</strong> ${record.business}</p><p><strong>Use case:</strong> ${record.use_case}</p>`
         }),
-        sendEmail({
-          from: fromOnboard,
+        sendTransactional({
           to: record.email,
-          subject: 'Welcome to ChatReply Early Access',
-          html: `<p>Hi ${record.name},</p><p>Thanks for joining the waitlist. We will email a setup form soon. Early access runs Sept 12–15 with a free first week.</p>`
+          subject: 'Welcome to ChatReply Early Access — Next steps',
+          html: `<h1>Welcome, ${record.name}!</h1>
+                 <p>You're confirmed for early access between <strong>Sept 12–15</strong>. Your first week is free.</p>
+                 <p>In the coming days, we will email you a short setup form to complete before Sept 12. It will ask for:</p>
+                 <ul>
+                   <li>Business name and WhatsApp number</li>
+                   <li>FAQ list (questions and answers)</li>
+                   <li>Opening hours and delivery/returns info</li>
+                   <li>Preferred brand voice (formal or friendly)</li>
+                 </ul>
+                 <p>After you submit the form, we’ll guide you to connect WhatsApp and go live.</p>
+                 <p style="margin-top:12px;color:#374151;">Please do not reply to this email. For enquiries, contact <a href="mailto:hello@chatreply.online">hello@chatreply.online</a>, your message will be routed to our support team.</p>`,
+          text: `Welcome, ${record.name}! Early access Sept 12–15 (first week free).
+                We'll send a setup form to complete before Sept 12 asking for: business name & WhatsApp number; FAQs; hours & delivery/returns; brand voice. After submission, we'll help connect WhatsApp and go live.
+                Do not reply to this email. For enquiries, contact hello@chatreply.online, your message will be routed to our support team.`,
+          replyTo: process.env.ZOHO_HELLO_USER
         })
       ])
     } catch (emailErr) {
