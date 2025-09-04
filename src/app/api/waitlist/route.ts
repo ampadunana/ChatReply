@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase";
+import { sendEmail } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -50,6 +51,29 @@ export async function POST(req: Request) {
         return NextResponse.json({ ok: false, message }, { status: 500 });
       }
       return new NextResponse("Failed to save to database", { status: 500 });
+    }
+
+    // Fire-and-forget emails (do not block response)
+    const notifyTo = process.env.RESEND_TO_SUPPORT_EMAIL || process.env.CONTACT_TO_EMAIL || 'hello@chatreply.online'
+    const fromSupport = process.env.RESEND_FROM_SUPPORT_EMAIL || 'ChatReply Support <hello@chatreply.online>'
+    const fromOnboard = process.env.RESEND_FROM_ONBOARD_EMAIL || fromSupport
+    try {
+      await Promise.all([
+        sendEmail({
+          from: fromSupport,
+          to: notifyTo,
+          subject: `New waitlist signup: ${record.name}`,
+          html: `<p><strong>Name:</strong> ${record.name}</p><p><strong>Email:</strong> ${record.email}</p><p><strong>Business:</strong> ${record.business}</p><p><strong>Use case:</strong> ${record.use_case}</p>`
+        }),
+        sendEmail({
+          from: fromOnboard,
+          to: record.email,
+          subject: 'Welcome to ChatReply Early Access',
+          html: `<p>Hi ${record.name},</p><p>Thanks for joining the waitlist. We will email a setup form soon. Early access runs Sept 12–15 with a free first week.</p>`
+        })
+      ])
+    } catch (emailErr) {
+      console.warn('Waitlist email failed', emailErr)
     }
 
     return NextResponse.json({ ok: true, data: result ?? null });

@@ -5,13 +5,13 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://chatreply.online"),
-  title: "ChatReply — WhatsApp AI Chatbot for SMBs",
+  title: "ChatReply — 24/7 AI Customer Service on WhatsApp",
   description:
-    "ChatReply automates WhatsApp replies for small businesses: instant FAQs, lead capture, and simple analytics. Affordable, fast, and easy to set up.",
+    "Enterprise grade AI customer service for WhatsApp. 24/7 responses, lead capture, analytics. Plans from $39/mo (Starter), $79/mo (Pro), $199/mo (Enterprise).",
   openGraph: {
-    title: "ChatReply — WhatsApp AI Chatbot for SMBs",
+    title: "ChatReply — 24/7 AI Customer Service on WhatsApp",
     description:
-      "Automate WhatsApp replies, capture leads, and get simple analytics. Start lean, validate, and scale.",
+      "Resolve questions instantly, capture leads automatically, and escalate to your team. Enterprise security and analytics.",
     url: "https://chatreply.online",
     siteName: "ChatReply",
     images: [{ url: "/ChatReplyLogo.png", width: 1200, height: 630, alt: "ChatReply" }],
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ChatReply — WhatsApp AI for SMBs",
-    description: "Instant replies, lead capture, simple analytics.",
+    title: "ChatReply — 24/7 AI on WhatsApp",
+    description: "AI customer service that never sleeps. Lead capture and analytics included.",
     images: ["/ChatReplyLogo.png"]
   },
   icons: { 

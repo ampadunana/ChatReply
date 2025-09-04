@@ -13,12 +13,11 @@ export default function WaitlistPage() {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Join the Early Access Program
+            Early Access: WhatsApp AI Customer Service
           </h1>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Be among the first to experience the future of WhatsApp automation. 
-            Get exclusive access to features and help shape the product roadmap.
+            Be first to onboard between Sept 12–15. First week free trial. We’ll email a setup form—use your correct email and WhatsApp number.
           </p>
         </div>
 
@@ -38,7 +37,7 @@ export default function WaitlistPage() {
             {
               icon: Star,
               title: "Launch Benefits",
-              desc: "Special pricing and exclusive features when we officially launch. Limited to early access members."
+              desc: "First-week free trial and priority onboarding during the early access window."
             }
           ].map((benefit) => (
             <div key={benefit.title} className="card p-6 text-center">

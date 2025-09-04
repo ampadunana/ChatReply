@@ -1,25 +1,25 @@
 export default function Pricing() {
   return (
     <section className="container mt-10 mb-16">
-      <h1 className="text-3xl font-semibold tracking-tight">Simple, transparent pricing</h1>
-      <p className="mt-2 text-black/70">Start lean. Upgrade when you grow. Cancel anytime.</p>
+      <h1 className="text-3xl font-semibold tracking-tight">Pricing</h1>
+      <p className="mt-1 text-black/60">Choose the plan that works for you</p>
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         {[
           {
             name: "Starter",
-            price: "$29/mo",
-            features: ["1 WhatsApp number", "FAQs auto-reply", "Lead capture", "Email support"]
-          },
-          {
-            name: "Growth",
-            price: "$79/mo",
-            features: ["2 numbers", "Multilingual replies", "Export leads (CSV)", "Priority support"]
+            price: "$39/mo",
+            features: ["1 WhatsApp number", "Instant FAQ replies", "Lead capture", "Email support"]
           },
           {
             name: "Pro",
+            price: "$79/mo",
+            features: ["2 numbers", "Multilingual replies", "CRM export", "Priority support"]
+          },
+          {
+            name: "Enterprise",
             price: "$199/mo",
-            features: ["5 numbers", "Advanced analytics", "Team seats", "SLA support"]
+            features: ["5+ numbers", "Advanced analytics", "Team seats", "SLA support"]
           }
         ].map((p) => (
           <div key={p.name} className="card p-6">
