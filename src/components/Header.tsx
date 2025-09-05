@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 
 const nav = [
   { href: "/", label: "Home" },
-  { href: "/waitlist", label: "Early Access" },
+  { href: "/waitlist#waitlist", label: "Early Access" },
   { href: "/pricing", label: "Pricing" },
   { href: "/contact", label: "Contact" }
 ];
@@ -30,7 +30,7 @@ export default function Header() {
             <Link
               key={n.href}
               href={n.href}
-              className={`hover:text-black ${pathname === n.href ? "text-black font-semibold" : "text-black/70"}`}
+              className={`hover:text-black ${pathname === n.href.replace(/#.*/, "") ? "text-black font-semibold" : "text-black/70"}`}
             >
               {n.label}
             </Link>
@@ -40,7 +40,7 @@ export default function Header() {
         {/* Right actions */}
         <div className="flex items-center gap-3">
           <Link
-            href="/waitlist"
+            href="/waitlist#waitlist"
             className="inline-flex items-center rounded-xl bg-brand-600 px-4 py-2 text-white hover:bg-brand-700 focus-ring"
           >
             Join Early Access
@@ -71,7 +71,7 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href="/waitlist"
+              href="/waitlist#waitlist"
               className="mt-1 inline-flex items-center justify-center rounded-xl bg-brand-600 px-4 py-3 text-white hover:bg-brand-700 focus-ring"
               onClick={() => setOpen(false)}
             >

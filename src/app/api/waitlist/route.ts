@@ -8,10 +8,13 @@ export const runtime = 'nodejs';
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { name, email, business, website, whatsapp, useCase } = data || {};
+    const { name, email, business, country, whatsapp, useCase } = data || {};
 
-    if (!email || !name) {
-      return new NextResponse("Name and email are required", { status: 400 });
+    // Keep whatsapp as entered by user
+    const whatsappNumber = String(whatsapp || "").trim();
+
+    if (!email || !name || !country || !whatsapp) {
+      return new NextResponse("Name, email, country, and WhatsApp number are required", { status: 400 });
     }
 
     const ip =
@@ -23,8 +26,8 @@ export async function POST(req: Request) {
       name,
       email: String(email).toLowerCase().trim(),
       business: business || "",
-      website: website || "",
-      whatsapp: whatsapp || "",
+      country: country || "",
+      whatsapp: whatsappNumber,
       use_case: useCase || "",
       ip,
       user_agent: req.headers.get("user-agent") || ""
@@ -61,12 +64,12 @@ export async function POST(req: Request) {
         sendSupport({
           to: notifyTo,
           subject: `New waitlist signup: ${record.name}`,
-          html: `<p><strong>Name:</strong> ${record.name}</p><p><strong>Email:</strong> ${record.email}</p><p><strong>Business:</strong> ${record.business}</p><p><strong>Use case:</strong> ${record.use_case}</p>`
+          html: `<p><strong>Name:</strong> ${record.name}</p><p><strong>Email:</strong> ${record.email}</p><p><strong>Country:</strong> ${record.country}</p><p><strong>WhatsApp:</strong> ${record.whatsapp}</p><p><strong>Business:</strong> ${record.business}</p><p><strong>Use case:</strong> ${record.use_case}</p>`
         }),
         sendTransactional({
           to: record.email,
           subject: 'Welcome to ChatReply Early Access — Next steps',
-          html: `<h1>Welcome, ${record.name}!</h1>
+          html: `<h2 style="font-weight: 500; color: #374151; margin-bottom: 16px;">Welcome, ${record.name}!</h2>
                  <p>You're confirmed for early access between <strong>Sept 12–15</strong>. Your first week is free.</p>
                  <p>In the coming days, we will email you a short setup form to complete before Sept 12. It will ask for:</p>
                  <ul>
