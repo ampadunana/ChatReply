@@ -1,0 +1,20 @@
+
+> chatreply@1.0.0 start
+> next start -p 3000 -p 3010
+
+ ⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3010
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at C:\Users\DELL LAT\Documents\ChatReply\node_modules\next\dist\server\lib\start-server.js:280:16
+    at new Promise (<anonymous>)
+    at startServer (C:\Users\DELL LAT\Documents\ChatReply\node_modules\next\dist\server\lib\start-server.js:191:11)
+    at Module.nextStart (C:\Users\DELL LAT\Documents\ChatReply\node_modules\next\dist\cli\next-start.js:25:40)
+    at C:\Users\DELL LAT\Documents\ChatReply\node_modules\next\dist\bin\next:105:856 {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 3010
+}

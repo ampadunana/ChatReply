@@ -1,0 +1,9 @@
+
+> chatreply@1.0.0 start
+> next start -p 3000 -p 3025
+
+  ▲ Next.js 14.2.32
+  - Local:        http://localhost:3025
+
+ ✓ Starting...
+ ✓ Ready in 1726ms
