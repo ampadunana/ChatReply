@@ -25,7 +25,14 @@ export const metadata: Metadata = {
     description: OG.description,
     images: OG.images?.[0]?.url ? [OG.images[0].url] : [],
   },
-  icons: { icon: "/ChatReplyLogo.png" },
+  icons: { 
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon-6.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" }
+    ],
+    apple: "/apple-icon.png"
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -62,7 +62,7 @@ export default function Contact() {
                     <p className="text-lg font-semibold text-brand-600 mb-1">{method.email}</p>
                     <p className="text-xs text-gray-500">Subject: {method.subject}</p>
                   </div>
-                ) : (
+                ) : method.href ? (
                   <Link
                     href={method.href}
                     className="inline-flex items-center rounded-xl bg-brand-600 text-white px-6 py-3 font-semibold hover:bg-brand-700 transition-colors focus-ring"
@@ -70,7 +70,7 @@ export default function Contact() {
                     {method.action}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
-                )}
+                ) : null}
               </div>
             ))}
           </div>
